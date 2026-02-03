@@ -1,0 +1,325 @@
+---
+---
+<canvas id="hero-canvas"></canvas>
+
+<section id="hero" class="relative w-full h-[120vh] overflow-hidden flex flex-col items-center justify-start pt-32 perspective-container">
+    
+    <!-- Vignette & Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/0 via-black/5 to-[#050505] z-[1] pointer-events-none"></div>
+
+    <!-- Parallax Content Container -->
+    <div id="hero-content" class="relative z-20 flex flex-col items-center text-center w-full h-full transform-style-3d">
+        
+        <!-- CLUB LOGO -->
+        <div class="mb-10 hero-layer relative z-30 animate-float" style="transform: translateZ(60px)">
+            <div class="w-24 h-24 md:w-32 md:h-32 relative group">
+                <div class="absolute inset-0 bg-purple-500/30 blur-2xl rounded-full group-hover:bg-purple-400/40 transition-all duration-500"></div>
+                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AMPLIFY&backgroundColor=000000" alt="AI Amplify Logo" class="relative w-full h-full object-contain drop-shadow-2xl border border-white/10 rounded-2xl bg-black/50 backdrop-blur-sm p-2">
+            </div>
+        </div>
+
+        <!-- Main Title with Scramble Effect & Blend Mode -->
+        <div id="hero-title-group" class="relative mb-6 hero-layer z-30 mix-difference px-4" style="transform: translateZ(80px)">
+            <h1 class="font-display font-bold text-[10vw] md:text-[120px] leading-[0.85] tracking-tighter text-white drop-shadow-2xl">
+                <span class="block scramble-text" data-text="AI AMPLIFY"></span>
+                <span class="block scramble-text text-white/90" data-text="ACADEMY"></span>
+            </h1>
+        </div>
+
+        <!-- Subtext -->
+        <p class="font-sans text-lg md:text-xl text-neutral-300 max-w-xl leading-relaxed opacity-0 animate-[fadeInUp_1s_ease-out_1.2s_forwards] hero-layer mix-blend-screen z-30" style="transform: translateZ(40px)">
+            The premier intersection of <span class="text-white font-medium">ambition</span> and <span class="text-white font-medium">artificial intelligence</span>.
+        </p>
+
+        <!-- Buttons -->
+        <div class="mt-10 flex gap-4 opacity-0 animate-[fadeInUp_1s_ease-out_1.4s_forwards] hero-layer z-40" style="transform: translateZ(70px)">
+            <button class="group relative px-8 py-3 bg-white text-black rounded-full text-sm font-semibold hover:bg-neutral-200 transition-all hover:scale-105 active:scale-95 overflow-hidden shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                <span class="relative z-10 flex items-center gap-2">
+                    Join Community 
+                    <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                </span>
+            </button>
+            <button class="px-8 py-3 bg-black/40 border border-white/20 text-white rounded-full text-sm font-medium hover:bg-white/10 transition-all hover:border-white/40 backdrop-blur-md">
+                View Projects
+            </button>
+        </div>
+        
+        <!-- Floating Code Decor Elements -->
+        <div class="absolute left-[5%] top-[20%] hidden lg:block hero-layer" style="transform: translateZ(20px) rotateY(15deg)">
+            <div class="font-mono text-xs text-purple-400/70 p-4 border border-purple-500/10 rounded-lg bg-[#0a0a0a]/80 backdrop-blur-md shadow-lg w-64">
+                <div class="flex gap-1.5 mb-3 border-b border-purple-900/30 pb-2">
+                    <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+                    <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+                    <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+                </div>
+                <p class="text-gray-500"># Model Configuration</p>
+                <p><span class="text-violet-400">const</span> config = {</p>
+                <p class="pl-4">layers: <span class="text-yellow-300">128</span>,</p>
+                <p class="pl-4">activation: <span class="text-purple-300">'relu'</span>,</p>
+                <p class="pl-4">dropout: <span class="text-yellow-300">0.2</span></p>
+                <p>}</p>
+            </div>
+        </div>
+
+        <div class="absolute right-[8%] top-[30%] hidden lg:block hero-layer" style="transform: translateZ(30px) rotateY(-15deg)">
+            <div class="font-mono text-xs text-slate-300 p-4 border border-purple-700/30 rounded-lg bg-[#0a0a0a]/80 backdrop-blur-md shadow-lg">
+                <p class="text-[10px] uppercase tracking-widest mb-2 text-slate-500">Processing Tensor</p>
+                <div class="space-y-1">
+                    <div class="w-48 h-1 bg-slate-800 rounded overflow-hidden">
+                        <div class="h-full bg-purple-500/50 w-[70%] animate-pulse"></div>
+                    </div>
+                    <div class="flex justify-between text-[10px] text-purple-500/50">
+                        <span>Training...</span>
+                        <span>70%</span>
+                    </div>
+                </div>
+                <p class="mt-2 text-purple-400/60">&gt; Epoch 4/10 complete</p>
+            </div>
+        </div>
+
+        <!-- GROUP PHOTO (Bottom Layer) -->
+        <div class="absolute bottom-0 left-0 w-full h-[65vh] z-10 hero-layer mask-gradient-top pointer-events-none" style="transform: translateZ(10px)">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" alt="AI Amplify Members" class="w-full h-full object-cover opacity-80 grayscale-[30%] hover:grayscale-0 transition-all duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    // --- 1. Enhanced Canvas Background ---
+    const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
+    const ctx = canvas?.getContext('2d');
+    
+    let width: number, height: number;
+    let particles: Particle[] = [];
+    
+    const particleCount = 80;
+    const connectionDistance = 180; 
+    const mouseDistance = 250; 
+    
+    let mouse = { x: null as number | null, y: null as number | null };
+
+    class Particle {
+        x: number;
+        y: number;
+        vx: number;
+        vy: number;
+        size: number;
+        baseColor: string;
+
+        constructor() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.vx = (Math.random() - 0.5) * 0.8;
+            this.vy = (Math.random() - 0.5) * 0.8;
+            this.size = Math.random() * 3 + 1.5;
+            const colors = [
+                'rgba(168, 85, 247,',  // Purple
+                'rgba(139, 92, 246,',  // Violet
+                'rgba(192, 132, 252,'  // Light purple
+            ];
+            this.baseColor = colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            if (this.x < 0 || this.x > width) this.vx *= -1;
+            if (this.y < 0 || this.y > height) this.vy *= -1;
+
+            if (mouse.x != null && mouse.y != null) {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouseDistance) {
+                    const forceDirectionX = dx / distance;
+                    const forceDirectionY = dy / distance;
+                    const force = (mouseDistance - distance) / mouseDistance;
+                    const directionX = forceDirectionX * force * 3; 
+                    const directionY = forceDirectionY * force * 3;
+                    
+                    this.x -= directionX;
+                    this.y -= directionY;
+                }
+            }
+        }
+
+        draw() {
+            if (!ctx) return;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.baseColor + '0.7)';
+            ctx.fill();
+        }
+    }
+
+    function initCanvas() {
+        if (!canvas) return;
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+    }
+
+    function animateCanvas() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
+        
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+
+            for (let j = i; j < particles.length; j++) {
+                let dx = particles[i].x - particles[j].x;
+                let dy = particles[i].y - particles[j].y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < connectionDistance) {
+                    ctx.beginPath();
+                    let opacity = 1 - (distance / connectionDistance);
+                    ctx.strokeStyle = 'rgba(255, 255, 255,' + (opacity * 0.15) + ')';
+                    ctx.lineWidth = 1;
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+            
+            if (mouse.x != null && mouse.y != null) {
+                let dx = particles[i].x - mouse.x;
+                let dy = particles[i].y - mouse.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouseDistance) {
+                    ctx.beginPath();
+                    let opacity = 1 - (distance / mouseDistance);
+                    ctx.strokeStyle = particles[i].baseColor + (opacity * 0.4) + ')';
+                    ctx.lineWidth = 1;
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(animateCanvas);
+    }
+
+    window.addEventListener('resize', initCanvas);
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    initCanvas();
+    animateCanvas();
+
+    // --- 2. 3D Mouse Parallax ---
+    const heroSection = document.getElementById('hero');
+    const heroContent = document.getElementById('hero-content');
+
+    heroSection?.addEventListener('mousemove', (e: MouseEvent) => {
+        const x = (window.innerWidth / 2 - e.clientX) / 40;
+        const y = (window.innerHeight / 2 - e.clientY) / 40;
+        if (heroContent) {
+            heroContent.style.transform = `rotateY(${x * -0.5}deg) rotateX(${y * 0.5}deg)`; 
+        }
+    });
+
+    heroSection?.addEventListener('mouseleave', () => {
+        if (heroContent) {
+            heroContent.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        }
+    });
+
+    // --- 3. Hacker Text Scramble Effect ---
+    class TextScramble {
+        el: HTMLElement;
+        chars: string;
+        queue: any[];
+        frame: number;
+        frameRequest: number | undefined;
+        resolve: any;
+
+        constructor(el: HTMLElement) {
+            this.el = el;
+            this.chars = '!<>-_\\/[]{}—=+*^?#________';
+            this.update = this.update.bind(this);
+            this.queue = [];
+            this.frame = 0;
+        }
+        
+        setText(newText: string) {
+            const oldText = this.el.innerText;
+            const length = Math.max(oldText.length, newText.length);
+            const promise = new Promise((resolve) => this.resolve = resolve);
+            this.queue = [];
+            for (let i = 0; i < length; i++) {
+                const from = oldText[i] || '';
+                const to = newText[i] || '';
+                const start = Math.floor(Math.random() * 40);
+                const end = start + Math.floor(Math.random() * 40);
+                this.queue.push({ from, to, start, end, char: '' });
+            }
+            if (this.frameRequest) cancelAnimationFrame(this.frameRequest);
+            this.frame = 0;
+            this.update();
+            return promise;
+        }
+        
+        update() {
+            let output = '';
+            let complete = 0;
+            for (let i = 0, n = this.queue.length; i < n; i++) {
+                let { from, to, start, end, char } = this.queue[i];
+                if (this.frame >= end) {
+                    complete++;
+                    output += to;
+                } else if (this.frame >= start) {
+                    if (!char || Math.random() < 0.28) {
+                        char = this.randomChar();
+                        this.queue[i].char = char;
+                    }
+                    output += `<span class="text-purple-500/50">${char}</span>`;
+                } else {
+                    output += from;
+                }
+            }
+            this.el.innerHTML = output;
+            if (complete === this.queue.length) {
+                this.resolve();
+            } else {
+                this.frameRequest = requestAnimationFrame(this.update);
+                this.frame++;
+            }
+        }
+        
+        randomChar() {
+            return this.chars[Math.floor(Math.random() * this.chars.length)];
+        }
+    }
+
+    const phrases = document.querySelectorAll('.scramble-text');
+    phrases.forEach(el => {
+        const fx = new TextScramble(el as HTMLElement);
+        const finalText = el.getAttribute('data-text') || '';
+        setTimeout(() => {
+            fx.setText(finalText);
+        }, 200);
+    });
+
+    // Scroll opacity for hero title
+    const heroTitleGroup = document.getElementById('hero-title-group');
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        if (heroTitleGroup && scrollY < 500) {
+            heroTitleGroup.style.opacity = (1 - (scrollY / 300)).toString();
+            heroTitleGroup.style.transform = `translateZ(80px) translateY(-${scrollY/2}px)`;
+        }
+    });
+</script>
